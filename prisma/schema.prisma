@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id           String       @id @default(cuid())
-  email        String       @unique
+  id           String          @id @default(cuid())
+  email        String          @unique
   passwordHash String
-  role         String       @default("STUDENT") // "ADMIN" or "STUDENT"
-  createdAt    DateTime     @default(now())
+  role         String          @default("STUDENT") // "ADMIN" or "STUDENT"
+  createdAt    DateTime        @default(now())
   enrollments  Enrollment[]
+  videoProgress VideoProgress[]
 }
 
 model Batch {
@@ -27,14 +28,15 @@ model Batch {
 }
 
 model Video {
-  id           String   @id @default(cuid())
-  title        String
-  description  String?
-  thumbnailUrl String?
-  videoUrl     String
-  batchId      String
-  batch        Batch    @relation(fields: [batchId], references: [id], onDelete: Cascade)
-  createdAt    DateTime @default(now())
+  id            String          @id @default(cuid())
+  title         String
+  description   String?
+  thumbnailUrl  String?
+  videoUrl      String
+  batchId       String
+  batch         Batch           @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  createdAt     DateTime        @default(now())
+  videoProgress VideoProgress[]
 }
 
 model Enrollment {
@@ -46,4 +48,17 @@ model Enrollment {
   batch Batch @relation(fields: [batchId], references: [id], onDelete: Cascade)
 
   @@id([userId, batchId])
+}
+
+model VideoProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  videoId     String
+  isCompleted Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, videoId])
 }

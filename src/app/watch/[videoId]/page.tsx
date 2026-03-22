@@ -3,6 +3,7 @@ import { getSession } from '@/lib/session';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import styles from './watch.module.css';
+import MarkCompleteButton from './MarkCompleteButton';
 
 interface WatchPageProps {
   params: Promise<{ videoId: string }>;
@@ -63,6 +64,16 @@ export default async function WatchPage({ params }: WatchPageProps) {
 
   const batchVideos = currentVideo.batch.videos;
 
+  const progressRecord = await prisma.videoProgress.findUnique({
+    where: {
+      userId_videoId: {
+        userId: session.userId as string,
+        videoId: currentVideo.id,
+      }
+    }
+  });
+  const isCompleted = progressRecord?.isCompleted || false;
+
   return (
     <div className={styles.layout}>
       {/* 70% Left Side - Video Player */}
@@ -88,6 +99,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
             </div>
           </div>
           <p className={styles.batchName}>From Batch: {currentVideo.batch.name}</p>
+          <MarkCompleteButton videoId={currentVideo.id} initialCompleted={isCompleted} />
           {currentVideo.description && (
             <div className={styles.description}>
               <h3>Description</h3>

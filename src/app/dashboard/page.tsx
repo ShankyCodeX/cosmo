@@ -25,6 +25,14 @@ export default async function DashboardPage() {
     }
   });
 
+  const progressRecords = await prisma.videoProgress.findMany({
+    where: { 
+      userId: session.userId as string,
+      isCompleted: true 
+    }
+  });
+  const completedVideoIds = new Set(progressRecords.map(p => p.videoId));
+
   return (
     <div className={`container ${styles.dashboard}`}>
       <header className={styles.header}>
@@ -42,8 +50,9 @@ export default async function DashboardPage() {
       ) : (
         <div className={styles.grid}>
           {enrollments.map(({ batch }: any) => {
-            // Mock progression logic: 30% or 0%
-            const progress = batch.videos.length > 0 ? 30 : 0; 
+            const totalVideos = batch.videos.length;
+            const completedCount = batch.videos.filter((v: any) => completedVideoIds.has(v.id)).length;
+            const progress = totalVideos > 0 ? Math.round((completedCount / totalVideos) * 100) : 0; 
             
             return (
               <Card key={batch.id} className={styles.batchCard}>

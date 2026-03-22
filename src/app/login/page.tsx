@@ -30,9 +30,9 @@ export default function LoginPage() {
       if (res.ok) {
         const data = await res.json();
         if (data.user.role === 'ADMIN') {
-          router.push('/admin');
+          window.location.href = '/admin';
         } else {
-          router.push('/dashboard');
+          window.location.href = '/dashboard';
         }
       } else {
         const data = await res.json();

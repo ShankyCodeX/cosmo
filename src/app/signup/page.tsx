@@ -68,11 +68,6 @@ export default function SignupPage() {
                 type="button"
                 className={`${styles.roleBtn} ${role === 'ADMIN' ? styles.activeRole : ''}`}
                 onClick={() => setRole('ADMIN')}
-              >
-                Admin (Faculty)
-              </button>
-            </div>
-            
             <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <Input

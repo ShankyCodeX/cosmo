@@ -1,0 +1,121 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 4rem);
+}
+
+.hero {
+  padding: 6rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  animation: slideDown 0.6s ease-out;
+}
+
+.highlight {
+  color: var(--primary);
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  animation: slideDown 0.8s ease-out;
+}
+
+.heroActions {
+  display: flex;
+  gap: 1rem;
+  animation: fadeIn 1s ease-out;
+}
+
+.bigButton {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  height: 3.5rem;
+}
+
+.featuresSection {
+  padding: 5rem 0;
+  background-color: var(--bg-secondary);
+  flex: 1;
+}
+
+.featuresContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+  letter-spacing: -0.025em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.featureCard {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--bg-primary);
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-lg);
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.featureText {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

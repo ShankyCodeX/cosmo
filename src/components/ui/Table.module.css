@@ -1,0 +1,43 @@
+.wrapper {
+  width: 100%;
+  overflow: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--bg-primary);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.header {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.row {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s;
+}
+
+.row:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.head {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.cell {
+  padding: 1rem;
+  color: var(--text-primary);
+}

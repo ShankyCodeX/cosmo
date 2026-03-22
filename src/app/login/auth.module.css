@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 4rem);
+  background-color: var(--bg-secondary);
+  padding: 2rem 1rem;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 400px;
+  animation: slideDown 0.4s ease-out;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: -0.25rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.roleToggle {
+  display: flex;
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius);
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.roleBtn {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: calc(var(--radius) - 2px);
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.activeRole {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.error {
+  padding: 0.75rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--destructive);
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.fullWidthBtn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.footer {
+  justify-content: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.link {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

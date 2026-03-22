@@ -1,0 +1,110 @@
+.batchesPage {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.batchCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.batchDesc {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.features {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.icon {
+  font-size: 1.125rem;
+}
+
+.priceContainer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.freeBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.fullWidthMsg {
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}

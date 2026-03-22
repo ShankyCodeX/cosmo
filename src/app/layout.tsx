@@ -4,8 +4,8 @@ import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 
 export const metadata: Metadata = {
-  title: 'LMS Application | Physics Wallah Clone',
-  description: 'A high-performance, full-stack LMS',
+  title: 'Cosmo Academy',
+  description: 'High performance full-stack Learning Management System',
 };
 
 export default function RootLayout({

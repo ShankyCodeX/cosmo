@@ -56,18 +56,6 @@ export default function SignupPage() {
           <form onSubmit={handleSignup} className={styles.form}>
             {error && <div className={styles.error}>{error}</div>}
             
-            <div className={styles.roleToggle}>
-              <button
-                type="button"
-                className={`${styles.roleBtn} ${role === 'STUDENT' ? styles.activeRole : ''}`}
-                onClick={() => setRole('STUDENT')}
-              >
-                Student
-              </button>
-              <button
-                type="button"
-                className={`${styles.roleBtn} ${role === 'ADMIN' ? styles.activeRole : ''}`}
-                onClick={() => setRole('ADMIN')}
             <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <Input

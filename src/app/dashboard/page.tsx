@@ -64,11 +64,27 @@ export default async function DashboardPage() {
                   <p className={styles.videoCount}>{batch.videos.length} Lectures available</p>
                 </CardContent>
                 <CardFooter>
-                  <Link href={`/watch/${batch.videos[0]?.id || ''}`} className={styles.fullWidth}>
-                    <Button variant="primary" className={styles.fullWidth} disabled={batch.videos.length === 0}>
-                      {batch.videos.length > 0 ? 'Resume Learning' : 'No Lectures Yet'}
+                  {batch.videos.length > 0 ? (
+                    <Link 
+                      href={`/watch/${batch.videos[0].id}`} 
+                      style={{ 
+                        width: '100%', 
+                        display: 'block', 
+                        textAlign: 'center', 
+                        padding: '0.75rem 1.5rem', 
+                        backgroundColor: 'var(--primary)', 
+                        color: 'white', 
+                        borderRadius: 'var(--radius-md)',
+                        fontWeight: '500',
+                        textDecoration: 'none'
+                      }}>
+                      Resume Learning
+                    </Link>
+                  ) : (
+                    <Button variant="outline" className={styles.fullWidth} disabled>
+                      No Lectures Yet
                     </Button>
-                  </Link>
+                  )}
                 </CardFooter>
               </Card>
             );

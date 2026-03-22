@@ -3,75 +3,56 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Clearing old placeholder data...');
-  // We don't wipe users so you can keep testing your accounts
+  console.log('Generating 8 additional dummy courses...');
   
-  // 1. Create a dummy Batch
-  const batch1 = await prisma.batch.create({
-    data: {
-      name: 'Class 11th Physics - Motion & Mechanics',
-      description: 'Master the fundamentals of Physics with deep dives into kinematics, Newton\'s laws, and energy.',
-      price: 0, 
-    }
-  });
+  const courses = [
+    { name: 'Class 12th Chemistry - Organic Crash Course', desc: 'Master all organic name reactions, mechanisms, and isomers.', price: 0 },
+    { name: 'Advanced Mathematics - Calculus & Vectors', desc: 'Deep dive into integration, differentiation, and 3D geometry.', price: 0 },
+    { name: 'NEET Fastrack Biology', desc: 'Complete human physiology and plant genetics for NEET aspirants.', price: 0 },
+    { name: 'Data Structures & Algorithms in Python', desc: 'Trees, Graphs, Dynamic Programming, and technical interview prep.', price: 0 },
+    { name: 'Macroeconomics for Boards', desc: 'National income, money & banking, and government budget explained.', price: 0 },
+    { name: 'Artificial Intelligence & Machine Learning', desc: 'Introduction to neural networks, TensorFlow, and basic ML models.', price: 0 },
+    { name: 'Indian History & Constitution', desc: 'Comprehensive coverage of modern Indian history and constitutional law.', price: 0 },
+    { name: 'Business Studies & Entrepreneurship', desc: 'Principles of management, financial markets, and starting a startup.', price: 0 }
+  ];
 
-  const batch2 = await prisma.batch.create({
-    data: {
-      name: 'Complete Web Development Bootcamp',
-      description: 'Learn HTML, CSS, JavaScript, React, and Next.js from scratch.',
-      price: 0,
-    }
-  });
-
-  // 2. Add Dummy YouTube Videos
-  await prisma.video.createMany({
-    data: [
-      {
-        title: 'Physics 01: Introduction & Dimensional Analysis',
-        description: 'First lecture covering units, dimensions, and basic conversions.',
-        videoUrl: 'https://www.youtube.com/embed/8GEebx72-qs', // Random educational placeholder
-        batchId: batch1.id,
-      },
-      {
-        title: 'Physics 02: Kinematics 1D',
-        description: 'Speed, velocity, acceleration, and equations of motion.',
-        videoUrl: 'https://www.youtube.com/embed/b1tSGzJJUzQ',
-        batchId: batch1.id,
-      },
-      {
-        title: 'Web Dev: Setup Your Environment',
-        description: 'Installing VS Code, Node.js, and browser extensions.',
-        videoUrl: 'https://www.youtube.com/embed/8_X0nSrzXAw',
-        batchId: batch2.id,
-      },
-      {
-        title: 'Web Dev: HTML Crash Course',
-        description: 'Semantic tags, forms, and structure.',
-        videoUrl: 'https://www.youtube.com/embed/UB1O30fR-EE',
-        batchId: batch2.id,
+  for (const c of courses) {
+    const batch = await prisma.batch.create({
+      data: {
+        name: c.name,
+        description: c.desc,
+        price: c.price,
       }
-    ]
-  });
+    });
 
-  // Automatically enroll all existing students in Batch 1 so they see it immediately!
-  const students = await prisma.user.findMany({
-    where: { role: 'STUDENT' }
-  });
+    // Add a corresponding YouTube embed video placeholder
+    await prisma.video.create({
+      data: {
+        title: `${c.name} - Lecture 01`,
+        description: 'Introduction and syllabus overview for the course.',
+        videoUrl: 'https://www.youtube.com/embed/8GEebx72-qs', // Random educational placeholder
+        batchId: batch.id,
+      }
+    });
+  }
+
+  // Give all existing students access to all batches immediately so they aren't empty!
+  const students = await prisma.user.findMany({ where: { role: 'STUDENT' } });
+  const allBatches = await prisma.batch.findMany();
 
   for (const student of students) {
-    try {
-      await prisma.enrollment.create({
-        data: {
-          userId: student.id,
-          batchId: batch1.id
-        }
-      });
-    } catch (e) {
-      // Ignore if already enrolled
+    for (const batch of allBatches) {
+      try {
+        await prisma.enrollment.create({
+          data: { userId: student.id, batchId: batch.id }
+        });
+      } catch (e) {
+        // Will throw an error if already enrolled, which is perfectly fine to ignore
+      }
     }
   }
 
-  console.log('✅ Seed completed successfully! Added 2 dummy courses and 4 YouTube videos.');
+  console.log('✅ Seed completed successfully! Added 8 more dummy courses.');
 }
 
 main()

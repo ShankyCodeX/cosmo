@@ -33,6 +33,7 @@ model Video {
   description   String?
   thumbnailUrl  String?
   videoUrl      String
+  attachmentUrl String?
   batchId       String
   batch         Batch           @relation(fields: [batchId], references: [id], onDelete: Cascade)
   createdAt     DateTime        @default(now())

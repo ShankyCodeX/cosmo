@@ -19,6 +19,7 @@ export default function UploadVideoClient({ batches }: { batches: Batch[] }) {
   const [description, setDescription] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
+  const [attachmentUrl, setAttachmentUrl] = useState('');
   const [batchId, setBatchId] = useState(batches.length > 0 ? batches[0].id : '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -37,7 +38,7 @@ export default function UploadVideoClient({ batches }: { batches: Batch[] }) {
       const res = await fetch('/api/admin/videos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, description, videoUrl, thumbnailUrl, batchId }),
+        body: JSON.stringify({ title, description, videoUrl, thumbnailUrl, attachmentUrl, batchId }),
       });
 
       if (res.ok) {
@@ -113,6 +114,17 @@ export default function UploadVideoClient({ batches }: { batches: Batch[] }) {
                   placeholder="https://example.com/image.jpg"
                   value={thumbnailUrl}
                   onChange={(e) => setThumbnailUrl(e.target.value)}
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="attachmentUrl">Attachment URL (Optional PDF/DPP)</label>
+                <Input
+                  id="attachmentUrl"
+                  type="url"
+                  placeholder="https://drive.google.com/..."
+                  value={attachmentUrl}
+                  onChange={(e) => setAttachmentUrl(e.target.value)}
                 />
               </div>
 

@@ -99,6 +99,29 @@ export default async function WatchPage({ params }: WatchPageProps) {
             </div>
           </div>
           <p className={styles.batchName}>From Batch: {currentVideo.batch.name}</p>
+
+          {currentVideo.attachmentUrl && (
+            <a 
+              href={currentVideo.attachmentUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                marginTop: '0.5rem',
+                marginBottom: '1rem',
+                padding: '0.5rem 1rem',
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius)',
+                color: 'var(--primary)',
+                fontWeight: '600',
+                fontSize: '0.875rem'
+              }}
+            >
+              📄 Download DPP / Class Notes
+            </a>
+          )}
+
           <MarkCompleteButton videoId={currentVideo.id} initialCompleted={isCompleted} />
           {currentVideo.description && (
             <div className={styles.description}>

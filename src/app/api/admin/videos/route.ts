@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { title, description, thumbnailUrl, videoUrl, batchId } = body;
+    const { title, description, thumbnailUrl, videoUrl, batchId, attachmentUrl } = body;
 
     const video = await prisma.video.create({
       data: {
@@ -19,6 +19,7 @@ export async function POST(request: Request) {
         description,
         thumbnailUrl,
         videoUrl,
+        attachmentUrl,
         batchId,
       },
     });

@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { getSession } from '@/lib/session';
-import prisma from '@/lib/prisma';
 import { Button } from '@/components/ui/Button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/Table';
+import DeleteButton from './DeleteButton';
 import styles from './admin.module.css';
 
 export default async function AdminDashboard() {
@@ -57,6 +57,7 @@ export default async function AdminDashboard() {
               <TableHead>Lectures</TableHead>
               <TableHead>Students Enrolled</TableHead>
               <TableHead>Created</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -72,6 +73,9 @@ export default async function AdminDashboard() {
                 <TableCell>{batch._count.videos}</TableCell>
                 <TableCell>{batch._count.enrollments}</TableCell>
                 <TableCell>{new Date(batch.createdAt).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  <DeleteButton id={batch.id} type="batches" />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -89,6 +93,7 @@ export default async function AdminDashboard() {
               <TableHead>Batch</TableHead>
               <TableHead>Video Link</TableHead>
               <TableHead>Uploaded</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -105,6 +110,9 @@ export default async function AdminDashboard() {
                   <a href={video.videoUrl} target="_blank" rel="noreferrer" className={styles.link}>View Video</a>
                 </TableCell>
                 <TableCell>{new Date(video.createdAt).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  <DeleteButton id={video.id} type="videos" />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -6,11 +6,11 @@ import { hashPassword, signToken } from '@/lib/auth';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, password, role } = body;
+    const { email, password, role, otp } = body;
 
-    if (!email || !password) {
+    if (!email || !password || !otp) {
       return NextResponse.json(
-        { message: 'Email and password are required' },
+        { message: 'Email, password, and OTP are required' },
         { status: 400 }
       );
     }
@@ -23,6 +23,19 @@ export async function POST(request: Request) {
       );
     }
 
+    // Verify OTP
+    const otpRecord = await prisma.otp.findFirst({
+      where: { email, code: String(otp) }
+    });
+
+    if (!otpRecord) {
+      return NextResponse.json({ message: 'Invalid OTP code' }, { status: 400 });
+    }
+
+    if (new Date() > otpRecord.expiresAt) {
+      return NextResponse.json({ message: 'OTP has expired' }, { status: 400 });
+    }
+
     const passwordHash = await hashPassword(password);
     const user = await prisma.user.create({
       data: {
@@ -31,6 +44,9 @@ export async function POST(request: Request) {
         role: role === 'ADMIN' ? 'ADMIN' : 'STUDENT',
       },
     });
+
+    // Delete used OTPs
+    await prisma.otp.deleteMany({ where: { email } });
 
     const token = await signToken({ userId: user.id, email: user.email, role: user.role });
 

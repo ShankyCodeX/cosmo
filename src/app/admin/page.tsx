@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { getSession } from '@/lib/session';
+import prisma from '@/lib/prisma';
 import { Button } from '@/components/ui/Button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/Table';
 import DeleteButton from './DeleteButton';

@@ -63,3 +63,13 @@ model VideoProgress {
 
   @@unique([userId, videoId])
 }
+
+model Otp {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}

@@ -55,6 +55,23 @@
   height: 3.5rem;
 }
 
+@media (max-width: 640px) {
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+  .heroActions {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .bigButton {
+    width: 100%;
+  }
+}
+
 .featuresSection {
   padding: 5rem 0;
   background-color: var(--bg-secondary);

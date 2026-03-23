@@ -67,6 +67,15 @@
   margin-bottom: 2rem;
 }
 
+@media (max-width: 640px) {
+  .videoTitle {
+    font-size: 1.25rem;
+  }
+  .videoInfo {
+    padding: 1.25rem;
+  }
+}
+
 .controlsMock {
   display: flex;
   gap: 0.5rem;

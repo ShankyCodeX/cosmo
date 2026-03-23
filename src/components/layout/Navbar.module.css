@@ -30,3 +30,12 @@
   align-items: center;
   gap: 1rem;
 }
+
+@media (max-width: 640px) {
+  .brand {
+    font-size: 1.125rem;
+  }
+  .actions {
+    gap: 0.5rem;
+  }
+}
